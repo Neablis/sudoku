@@ -28,12 +28,23 @@
     "grunt-contrib-sass": "~0.3.0",
     "grunt-contrib-watch": "~0.4.4",
     "grunt-contrib-compass": "~0.8.0",
-    "grunt-nodemon": "~0.2"
+    "grunt-nodemon": "~0.2",
+    "karma": "~0.12.16",
+    "grunt-karma": "~0.8.3",
+    "karma-html-reporter": "~0.2.3"
   },
   "devDependencies": {
     "grunt-nodemon": "~0.2.1",
     "grunt-contrib-jshint": "~0.10.0",
-    "grunt-concurrent": "~0.5.0"
+    "grunt-concurrent": "~0.5.0",
+    "mocha": "~1.20.1",
+    "karma-mocha": "~0.1.4",
+    "requirejs": "~2.1.14",
+    "karma-requirejs": "~0.2.2",
+    "karma-chrome-launcher": "~0.1.4",
+    "chai": "~1.9.1",
+    "karma-chai": "~0.1.0",
+    "karma": "~0.12.16"
   },
   "homepage": "https://github.com/Neablis/sudoku"
 }
