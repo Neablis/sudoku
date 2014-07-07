@@ -15,7 +15,8 @@ require.config({
   paths: {
     'jquery': '../bower_components/jquery/jquery.min',
     'underscore': '../bower_components/lodash/lodash',
-    'Matrix': 'js/matrix'
+    'Matrix': 'js/matrix',
+    'Board': 'js/board'
   },
 
   shim: {

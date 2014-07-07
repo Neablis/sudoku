@@ -1,0 +1,20 @@
+<div id="sudoku_board">
+    <% 
+        function get_block (x) {
+            var column = x%9,
+                row = Math.floor(x/9);
+
+
+
+            return {col: column, row: row};
+        }
+
+        _.forEach(board, function (cell, index, board) {
+            var block = get_block(cell);
+        %>
+
+
+        <%
+        });
+    %>
+</div>

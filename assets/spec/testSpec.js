@@ -1,4 +1,4 @@
-define(['require', 'Matrix'], function (require, Matrix) {
+define(['require', 'Matrix', 'Board'], function (require, Matrix, Board) {
 	describe("Matrix", function() {
 		it('should init a new matrix', function () {
 			var matrix = new Matrix();
@@ -11,31 +11,25 @@ define(['require', 'Matrix'], function (require, Matrix) {
 			expect(matrix.length).to.eql(25);
 		});
 
+		it('should resize a existing matrix', function () {
+			var matrix = new Matrix(5);
+			expect(matrix.length).to.eql(25);
+			matrix.resize(6);
+			expect(matrix.length).to.eql(36);
+		});
 
 		it('should set a specific value in matrix', function () {
 			var matrix = new Matrix(5);
-			matrix.set(5,5,5);
-			expect(matrix.indexOf(5, 5)).to.eql(5);
+			matrix.set(4,4,5);
+			expect(matrix.indexOf(4, 4)).to.eql(5);
 		});
 
-		it('should not set a value if outside range', function () {
-			var matrix = new Matrix(5);
-			matrix.clear();
-			matrix.set(6,6,5);
-			expect(matrix.indexOf(6, 6)).to.eql(0);
-		});
 		it('should return undefined if indexOf is out of matrix', function () {
 			var matrix = new Matrix(5);
-			expect(matrix.indexOf(-1, -1)).to.be(undefined);
-			expect(matrix.indexOf(6, 6)).to.be(undefined);
+			expect(matrix.indexOf(-1, -1)).to.be.undefined;
+			expect(matrix.indexOf(5, 5)).to.be.undefined;
+		});
 
-		});
-		it('should not set a value if outside range', function () {
-			var matrix = new Matrix(5);
-			matrix.clear();
-			matrix.set(6, 6, 5);
-			expect(matrix.indexOf(6, 6)).to.eql(0);
-		});
 		it('should chain setters', function () {
 			var matrix = new Matrix(5);
 			matrix.set(0,0,5).set(0,1,5).set(0,2,5);
@@ -48,6 +42,28 @@ define(['require', 'Matrix'], function (require, Matrix) {
 			var matrix = new Matrix(5);
 			matrix.set(0,0,5).clear();
 			expect(matrix.indexOf(0,0)).to.eql(0);
+		});
+	});
+
+	describe("Board", function() {
+		it('should init a new Board', function () {
+			var board = new Board(Matrix);
+			expect(board.matrix.length).to.eql(81);
+		});
+
+		it('should init to a base board', function () {
+			var starting_point = [1, 2, 3, 4, 5, 6, 7, 8, 9,
+								  4, 5, 6, 7, 8, 9, 1, 2, 3,
+								  7, 8, 9, 1, 2, 3, 4, 5, 6,
+								  2, 3, 4, 5, 6, 7, 8, 9, 1,
+								  5, 6, 7, 8, 9, 1, 2, 3, 4,
+								  8, 9, 1, 2, 3, 4, 5, 6, 7,
+								  3, 4, 5, 6, 7, 8, 9, 1, 2,
+								  6, 7, 8, 9, 1, 2, 3, 4, 5,
+								  9, 1, 2, 3, 4, 5, 6, 7, 8];
+
+			var board = new Board(Matrix);
+			expect(board.matrix.matrix_array).to.eql(starting_point);
 		});
 	});
 });

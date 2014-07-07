@@ -52,7 +52,7 @@ module.exports = function(grunt) {
             }
         },
         jshint: {
-            all: ['Gruntfile.js', 'food_truck/**/*.js']
+            all: ['Gruntfile.js', 'assets/js/*.js']
         }
     });
 
