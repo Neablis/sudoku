@@ -65,5 +65,23 @@ define(['require', 'Matrix', 'Board'], function (require, Matrix, Board) {
 			var board = new Board(Matrix);
 			expect(board.matrix.matrix_array).to.eql(starting_point);
 		});
+
+		it('should be solvable after shuffling the board for play', function () {
+			var board = new Board(Matrix);
+			board.shuffle();
+
+			expect(board.solved()).to.eql(true);
+		});
+
+		it('should check a value in a row/col and return if its good', function () {
+			var board = new Board(Matrix);
+			board.shuffle();
+			var correct_val = board.matrix.indexOf(0);
+			if (correct_val !== 5) {
+				expect(board.check_val(0,0,5)).to.eql(false);
+			} else {
+				expect(board.check_val(0,0,6)).to.eql(false);
+			}
+		});
 	});
 });

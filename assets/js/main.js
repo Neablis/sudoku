@@ -16,6 +16,8 @@ requirejs(['jquery', 'underscore', 'Matrix', 'Board'], function($, _, Matrix, Bo
         $('#sudoku_application').html('hello world!');
 
         var board = new Board(Matrix);
+        // I always find it useful to hold the namespace of the project at the window level in some way
+        window.Sudoku = board;
         board.shuffle();
         board.matrix._log();
 
