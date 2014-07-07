@@ -1,0 +1,17 @@
+/* line 1, ../sass/sudoku.scss */
+#sudoku_board {
+  width: 297px;
+  height: 297px;
+}
+/* line 4, ../sass/sudoku.scss */
+#sudoku_board .parentCube {
+  width: 99px;
+  height: 99px;
+  float: left;
+}
+/* line 8, ../sass/sudoku.scss */
+#sudoku_board .parentCube .childCube {
+  width: 33px;
+  height: 33px;
+  float: left;
+}

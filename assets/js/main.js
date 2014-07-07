@@ -1,6 +1,7 @@
 requirejs.config({
 	baseUrl: '/',
 	paths: {
+		text: 'bower_components/requirejs-plugins/lib/text',
 		jquery: 'bower_components/jquery/jquery.min',
 		underscore: 'bower_components/lodash/dist/lodash.underscore.min',
         'Matrix': 'assets/js/matrix',
@@ -11,7 +12,8 @@ requirejs.config({
     }
 });
 
-requirejs(['jquery', 'underscore', 'Matrix', 'Board'], function($, _, Matrix, Board) {
+requirejs(['jquery', 'underscore', 'Matrix', 'Board', 'text!assets/templates/board.tp'], 
+	function($, _, Matrix, Board, BoardTP) {
 
         $('#sudoku_application').html('hello world!');
 
@@ -20,5 +22,7 @@ requirejs(['jquery', 'underscore', 'Matrix', 'Board'], function($, _, Matrix, Bo
         window.Sudoku = board;
         board.shuffle();
         board.matrix._log();
+
+        $('#sudoku_application').append(_.template(BoardTP));
 
 });

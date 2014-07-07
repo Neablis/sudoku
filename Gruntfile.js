@@ -18,8 +18,7 @@ module.exports = function(grunt) {
         compass: {
             dist: {
                 options: {
-                    sassDir: 'stylesheets/sass',
-                    cssDir: 'stylesheets/css'
+                    config: 'config.rb'
                 }
             }
         },

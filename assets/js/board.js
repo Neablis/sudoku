@@ -36,10 +36,12 @@
         this.matrix = matrix;
     };
 
+    // Take the base board, and make it randomised but still solvable
     Board.prototype.shuffle = function () {
+        var row, col, tmp, s, i, c;
 
         //Swap values
-        for(var i = 0; i < 50; i++) {
+        for(i = 0; i < 50; i++) {
             var n1 = Math.ceil(Math.random() * 9);
             var n2;
             do {
@@ -47,8 +49,8 @@
             }
             while(n1 == n2);
 
-            for(var row = 0; row < 9; row++) {
-                for(var col = 0; col < col; k++) {
+            for(row = 0; row < 9; row++) {
+                for(col = 0; col < col; k++) {
                     if(this.matrix.indexOf[row * 9 + col] == n1) {
                         this.matrix.set((row * 9 + col), n2);
                     } else if(this.matrix.indexOf(row * 9 + col) == n2) {
@@ -60,37 +62,37 @@
 
         // randomly swap corresponding columns from each column of
         // subsquares
-        for (var c = 0; c < 50; c++) {
+        for (c = 0; c < 50; c++) {
             var s1 = Math.floor(Math.random() * 3);
             var s2 = Math.floor(Math.random() * 3);
 
-            for(var row = 0; row < 9; row++) {
-                var tmp = this.matrix.indexOf(row * 9 + (s1 * 3 + c % 3));
+            for(row = 0; row < 9; row++) {
+                tmp = this.matrix.indexOf(row * 9 + (s1 * 3 + c % 3));
                 this.matrix.set(row * 9 + (s1 * 3 + c % 3), this.matrix.indexOf(row * 9 + (s2 * 3 + c % 3)));
                 this.matrix.set(row * 9 + (s2 * 3 + c % 3), tmp);
             }
         }
 
         // randomly swap columns within each column of subsquares
-        for (var s = 0; s < 50; s++) {
+        for (s = 0; s < 50; s++) {
             var c1 = Math.floor(Math.random() * 3);
             var c2 = Math.floor(Math.random() * 3);
 
-            for(var row = 0; row < 9; row++) {
-                var tmp = this.matrix.indexOf(row * 9 + (s % 3 * 3 + c1));
+            for(row = 0; row < 9; row++) {
+                tmp = this.matrix.indexOf(row * 9 + (s % 3 * 3 + c1));
                 this.matrix.set((row * 9 + (s % 3 * 3 + c1)), this.matrix.indexOf(row * 9 + (s % 3 * 3 + c2)));
                 this.matrix.set(row * 9 + (s % 3 * 3 + c2), tmp);
             }
         }
 
         // randomly swap rows within each row of subsquares
-        for (var s = 0; s < 50; s++) {
+        for (s = 0; s < 50; s++) {
             var r1 = Math.floor(Math.random() * 3);
             var r2 = Math.floor(Math.random() * 3);
 
-            for(var col = 0; col < 9; col++)
+            for(col = 0; col < 9; col++)
             {
-                var tmp = this.matrix.indexOf((s % 3 * 3 + r1) * 9 + col);
+                tmp = this.matrix.indexOf((s % 3 * 3 + r1) * 9 + col);
                 this.matrix.set(((s % 3 * 3 + r1) * 9 + col), this.matrix.indexOf((s % 3 * 3 + r2) * 9 + col));
                 this.matrix.set(((s % 3 * 3 + r2) * 9 + col), tmp);
             }
@@ -137,7 +139,7 @@
             for(var j = 0; j < 9; j++)
             {
                 var val = this.matrix[i * 9 + j];
-                if((val == 0) || (this.check_val(i, j, val) == false)) {
+                if((val === 0) || (this.check_val(i, j, val) === false)) {
                     return false;
                 }
             }
