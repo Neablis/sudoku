@@ -197,9 +197,18 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 /* line 125, ../sass/sudoku.scss */
 #footer {
   width: 100%;
+  margin-top: 20px;
+  padding-top: 2em;
+  text-align: center;
+  background-color: #578989;
+}
+/* line 131, ../sass/sudoku.scss */
+#footer #victory {
+  font-size: 2em;
+  clear: both;
 }
 
-/* line 129, ../sass/sudoku.scss */
+/* line 137, ../sass/sudoku.scss */
 .hidden {
   display: none;
 }

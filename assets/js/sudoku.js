@@ -27,6 +27,9 @@ define('Sudoku', ['jquery',
 		      	this.$header = this.$dom.find('#header');
 		        this.$header.html(_.template(HeaderTP));
 
+		       	this.$footer = this.$dom.find('#footer');
+		        this.$footer.html(_.template(FooterTP));
+
 		        this.$body = this.$dom.find('#application')
 
 		        this.board.shuffle();
@@ -104,17 +107,24 @@ define('Sudoku', ['jquery',
 			render: function (matrix) {
 				var that = this;
 				this.$body.html(_.template(BoardTP, {'matrix': matrix}));
-				this.$body.change(function (e) {
+				this.$body.off( "change");
+				this.$body.on( "change", function (e) {
 		        	var $target = $(e.target),
 		        		val = parseInt($target.val(), 10),
 		        		row = parseInt($target.parent().attr('row'), 10),
 		        		col = parseInt($target.parent().attr('column'), 10);
 
-		        	if (that.board.check_val(that.board.matrix, row, col, val)) {
+		        	if (that.board.matrix.indexOf(row,col) === val) {
 		        		that.board.mask.set(row, col, val);
 		        		that.render(that.board.mask);
 		        	}
 		        });
+
+        		if (that.board.compare(that.board.mask.matrix_array, that.board.matrix.matrix_array)) {
+        			this.$footer.find('#victory').removeClass('hidden');
+        		} else {
+        			this.$footer.find('#victory').addClass('hidden');
+        		}
 			}
 		};
         

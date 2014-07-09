@@ -213,5 +213,19 @@
         return this;
     };
 
+    Board.prototype.compare = function (matrix1, matrix2) {
+        if (matrix1.length !== matrix2.length) {
+            return false;
+        }
+
+        for( var x = 0; x < matrix1.length; x++) {
+            if (matrix1[x] !== matrix2[x]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     return Board;
 }));

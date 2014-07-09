@@ -1,4 +1,4 @@
 <div>
-	<span id="victory" class="hidden">Congradulations! You won!</span>
-	<span>Programmed by Mitchell DeMArco</span>
+	<h1 id="victory" class="hidden">Congradulations! You won!</h1>
+	<span>Programmed by Mitchell DeMarco</span>
 </div>
