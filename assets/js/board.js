@@ -8,7 +8,7 @@
     }
 }('Board', function () {
     /** Properties of the module. */
-    var width = 9, matrix, Matrix;
+    var width = 9, matrix, Matrix, mask;
 
     /** @constructor */
     Board = function (Matrix) {
@@ -20,20 +20,26 @@
         var matrix = new Matrix(width);
 
         //Sets matrix to a base predictable state
-        for (var i = 0; i < 9; i++)
-            for (var j = 0; j < 9; j++)
+        for (var i = 0; i < 9; i++) {
+            for (var j = 0; j < 9; j++) {
                 matrix.set(i * 9 + j, (i*3 + Math.floor(i/3) + j) % 9 + 1);
+            }
+        }
 
         this.matrix = matrix;
+        return this;
     };
 
     Board.prototype.restart = function () {
         var matrix = new this.Matrix(this.width);
-        for (var i = 0; i < 9; i++)
-            for (var j = 0; j < 9; j++)
+        for (var i = 0; i < 9; i++) {
+            for (var j = 0; j < 9; j++) {
                 matrix.set(i * 9 + j, (i*3 + Math.floor(i/3) + j) % 9 + 1);
+            }
+        }
 
         this.matrix = matrix;
+        return this;
     };
 
     // Take the base board, and make it randomised but still solvable
@@ -98,23 +104,26 @@
             }
         }
 
+        return this;
     };
 
-    Board.prototype.check_val = function(row, col, val) {
+    // Check if a value is good
+    Board.prototype.check_val = function(matrix, row, col, val) {
         var i, j, r, c;
         // check each cell in the row to see if the value already
         // exists in the row. do not look at the value of the cell in
         // the column we are trying. repeat for each zone.
         for(i = 0; i < 9; i++)
         {
-            if((i != col) && (this.matrix.indexOf(row * 9 + i) == val))
+            if((i != col) && (matrix.indexOf(row * 9 + i) == val)) {
                 return false;
+            }
         }
 
         // check col
         for(i = 0; i < 9; i++)
         {
-            if((i != row) && (this.matrix.indexOf(i * 9 + col) == val)) {
+            if((i != row) && (matrix.indexOf(i * 9 + col) == val)) {
                 return false;
             }
         }
@@ -124,7 +133,7 @@
         c = col - col % 3;
         for(i = r; i < r + 3; i++) {
             for(j = c; j < c + 3; j++) {
-                if(((i != row) || (j != col)) && (this.matrix.indexOf(i * 9 + j) == val)) {
+                if(((i != row) || (j != col)) && (matrix.indexOf(i * 9 + j) == val)) {
                     return false; 
                 }
             }
@@ -133,18 +142,61 @@
         return true;
     };
 
-    Board.prototype.solved = function () {
+    // Check if board is solved
+    Board.prototype.solved = function (matrix) {
         for(var i = 0; i < 9; i++)
         {
             for(var j = 0; j < 9; j++)
             {
                 var val = this.matrix[i * 9 + j];
-                if((val === 0) || (this.check_val(i, j, val) === false)) {
+                if((val === 0) || (this.check_val(matrix, i, j, val) === false)) {
                     return false;
                 }
             }
         }
         return true;
+    };
+
+    // Turn 5 known values in each parent cube into 0's (unkown)
+    Board.prototype.mask_board = function(matrix) {
+        var i, j, k, mask = new this.Matrix(this.matrix.matrix_array);
+        for(i = 0; i < matrix.length; i++) {
+            mask.set(i, matrix.indexOf(i));
+        }
+
+        for (i = 0; i < 3; i++) {
+            for (j = 0; j < 3; j++) {
+                // for each 3x3 subsquare, pick 5 random cells
+                // and mask them.
+                for (k = 0; k < 5; k++) {
+                    var c;
+                    do {
+                        c = Math.floor(Math.random() * 9);
+                    }
+                    while(mask.indexOf((i * 3 + Math.floor(c / 3)) * 9 + j * 3 + c % 3) === 0);
+
+                    mask.set((i * 3 + Math.floor(c / 3)) * 9 + j * 3 + c % 3, 0);
+                }
+            }
+        }
+        this.mask = mask;
+        return this;
+    };
+
+    // Pick a random unsolved index and show its value
+    Board.prototype.give_hint = function(matrix, mask) {
+        var masked_index = [], index, value;
+        for (var x = 0; x < mask.length; x++) {
+            if (mask.indexOf(x) === 0) {
+                masked_index.push(x);
+            }
+        }
+
+        index = masked_index[Math.floor(Math.random() * masked_index.length)];
+        value = matrix.indexOf(index);
+        mask.set(index, value);
+        
+        return this;
     };
 
     return Board;

@@ -14,15 +14,21 @@
     
     /** @constructor */
     Matrix = function (width) {
-    	if (width === undefined || typeof width !== 'number') {
+    	if (width !== undefined && typeof width === 'object') {
+    		// A way of making copies of existing matrix throw constructor.
+    		// This is horrible and doesnt do much checking
+    		this.length = width.length;
+    		this.width = Math.sqrt(width.length);
+    		this.matrix_array = width.slice(0);
+    		return this;
+    	} else if (width === undefined || typeof width !== 'number') {
     		width = 0;
     	}
 
     	// Since matrix is perfect square, width ^2 is the total length of the underlying array
 	    this.length = width * width;
-	    this.width = width;
-
-	    this.matrix_array = new Array(this.length);
+		this.width = width;
+		this.matrix_array = new Array(this.length);
 
 	    //Clear will initialize the array to 0s in all places
 	    this.clear();

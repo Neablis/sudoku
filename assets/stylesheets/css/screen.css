@@ -69,18 +69,60 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
 /* line 1, ../sass/sudoku.scss */
 #sudoku_board {
-  width: 297px;
-  height: 297px;
+  margin: auto;
+  width: 370px;
 }
 /* line 4, ../sass/sudoku.scss */
 #sudoku_board .parentCube {
-  width: 99px;
-  height: 99px;
+  border: 1px solid black;
+  text-align: center;
+  width: 110px;
+  height: 80px;
   float: left;
+  display: table;
+  padding-top: 10px;
+  padding-left: 5px;
 }
-/* line 8, ../sass/sudoku.scss */
+/* line 13, ../sass/sudoku.scss */
 #sudoku_board .parentCube .childCube {
+  display: table-cell;
   width: 33px;
   height: 33px;
+  vertical-align: middle;
   float: left;
+}
+/* line 19, ../sass/sudoku.scss */
+#sudoku_board .parentCube .childCube input[type=number] {
+  width: 20px;
+}
+/* line 22, ../sass/sudoku.scss */
+#sudoku_board .parentCube .childCube input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  cursor: pointer;
+  display: block;
+  width: 8px;
+  color: #333;
+  text-align: center;
+  position: relative;
+}
+/* line 32, ../sass/sudoku.scss */
+#sudoku_board .parentCube .childCube input[type=number]::-webkit-inner-spin-button:hover {
+  color: #236DCD;
+}
+/* line 37, ../sass/sudoku.scss */
+#sudoku_board .parentCube .childCube input[type=number]::-webkit-inner-spin-button:before,
+#sudoku_board .parentCube .childCube input[type=number]::-webkit-inner-spin-button:after {
+  content: "^";
+  position: absolute;
+  right: 0;
+  font-family: monospace;
+}
+/* line 44, ../sass/sudoku.scss */
+#sudoku_board .parentCube .childCube input[type=number]::-webkit-inner-spin-button:before {
+  top: 0px;
+}
+/* line 48, ../sass/sudoku.scss */
+#sudoku_board .parentCube .childCube input[type=number]::-webkit-inner-spin-button:after {
+  bottom: 0px;
+  -webkit-transform: rotate(180deg);
 }

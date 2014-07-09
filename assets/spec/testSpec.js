@@ -1,4 +1,4 @@
-define(['require', 'Matrix', 'Board'], function (require, Matrix, Board) {
+define(['require', 'Matrix', 'Board'], function (require, Matrix, Board, BoardTP) {
 	describe("Matrix", function() {
 		it('should init a new matrix', function () {
 			var matrix = new Matrix();
@@ -16,6 +16,12 @@ define(['require', 'Matrix', 'Board'], function (require, Matrix, Board) {
 			expect(matrix.length).to.eql(25);
 			matrix.resize(6);
 			expect(matrix.length).to.eql(36);
+		});
+
+		it('should take a existing array and initialize to it', function () {
+			var matrix = new Matrix([1,2,3,4,5,6,7,8,9]);
+			expect(matrix.length).to.eql(9);
+			expect(matrix.matrix_array).to.eql([1,2,3,4,5,6,7,8,9]);
 		});
 
 		it('should set a specific value in matrix', function () {
@@ -70,7 +76,7 @@ define(['require', 'Matrix', 'Board'], function (require, Matrix, Board) {
 			var board = new Board(Matrix);
 			board.shuffle();
 
-			expect(board.solved()).to.eql(true);
+			expect(board.solved(board.matrix)).to.eql(true);
 		});
 
 		it('should check a value in a row/col and return if its good', function () {
@@ -78,10 +84,52 @@ define(['require', 'Matrix', 'Board'], function (require, Matrix, Board) {
 			board.shuffle();
 			var correct_val = board.matrix.indexOf(0);
 			if (correct_val !== 5) {
-				expect(board.check_val(0,0,5)).to.eql(false);
+				expect(board.check_val(board.matrix,0,0,5)).to.eql(false);
 			} else {
-				expect(board.check_val(0,0,6)).to.eql(false);
+				expect(board.check_val(board.matrix,0,0,6)).to.eql(false);
 			}
+		});
+
+		it('should mask a board with 0s', function () {
+			var board = new Board(Matrix), count = 0;
+			board.shuffle();
+
+			board.mask_board(board.matrix, board.mask);
+
+			for (var x = 0; x < board.matrix.length; x++) {
+				if (board.mask.indexOf(x) === 0) {
+					count++;
+				}
+			}
+			
+			expect(count++).to.eql(9*5);
+		});
+
+		it('should change on of the masked values to its correct value', function () {
+			var board = new Board(Matrix), count = 0;
+			board.shuffle();
+
+			board.mask_board(board.matrix, board.mask);
+
+			for (var x = 0; x < board.matrix.length; x++) {
+				if (board.mask.indexOf(x) === 0) {
+					count++;
+				}
+			}
+			
+			expect(count).to.eql(9*5);
+
+			board.give_hint(board.matrix, board.mask);
+
+			count = 0;
+
+			for (var x = 0; x < board.matrix.length; x++) {
+				if (board.mask.indexOf(x) === 0) {
+					count++;
+				}
+			}
+			
+			expect(count).to.eql((9*5) - 1);
 		});
 	});
 });

@@ -7,8 +7,26 @@
             <%
             //Defining each cell in cube
             for (var y = 0; y < 9; y++) {
+                var row = (y%3 + (x*3)) % 9,
+                    column = (Math.floor(y/3)) + (Math.floor(x/3)*3),
+                    value = matrix.indexOf(row, column);
+
                 %>
-                    <div class="childCube"><%= y %></div>
+                    <div class="childCube" row="<%= row %>" column="<%= column %>">
+                        <% 
+                            if (value === 0) {
+                            %>
+                            <input type="number" min="1" max="9">
+                            <%
+                            } else {
+                            %>
+                            <%=
+                                value
+                            %>
+                            <%
+                            }
+                        %>
+                    </div>
                 <%
             }
             %>

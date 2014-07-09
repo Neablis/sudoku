@@ -14,15 +14,13 @@ requirejs.config({
 
 requirejs(['jquery', 'underscore', 'Matrix', 'Board', 'text!assets/templates/board.tp'], 
 	function($, _, Matrix, Board, BoardTP) {
-
-        $('#sudoku_application').html('hello world!');
-
         var board = new Board(Matrix);
         // I always find it useful to hold the namespace of the project at the window level in some way
         window.Sudoku = board;
-        board.shuffle();
-        board.matrix._log();
 
-        $('#sudoku_application').append(_.template(BoardTP));
+        board.shuffle();
+        board.mask_board(board.matrix);
+        board.give_hint(board.matrix, board.mask);
+        $('#sudoku_application').html(_.template(BoardTP, {'matrix': board.mask}));
 
 });
