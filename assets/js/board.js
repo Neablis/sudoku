@@ -213,6 +213,7 @@
         return this;
     };
 
+    // Quick way of comparing if two arrays are equal
     Board.prototype.compare = function (matrix1, matrix2) {
         if (matrix1.length !== matrix2.length) {
             return false;

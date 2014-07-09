@@ -42,9 +42,9 @@ define('Sudoku', ['jquery',
 		        	that.show_hint();
 		        });
 
-		      	this.$header.find('#load').click(function (e) {
+		      	this.$header.find('#check').click(function (e) {
 		        	e.preventDefault();
-		        	that.load();
+		        	that.won_check();
 		        });
 
 		        this.$header.find('#start').click(function (e) {
@@ -93,11 +93,23 @@ define('Sudoku', ['jquery',
 
 				}
 			},
+			is_solved: function () {
+				return this.board.compare(this.board.mask.matrix_array, 
+					this.board.matrix.matrix_array);
+			},
+			won_check: function () {
+				if (this.is_solved()) {
+					this.show_answer();
+        			this.$footer.find('#victory').removeClass('hidden');
+        		} else {
+        			this.$footer.find('#victory').addClass('hidden');
+        		}
+			},
 			show_hint: function () {
 				this.board.give_hint(this.board.matrix, this.board.mask);
+				this.save();
 				this.render(this.board.mask);
 			},
-
 			show_answer: function () {
 				this.board.mask = this.board.matrix;
 				this.render(this.board.mask);
@@ -113,18 +125,8 @@ define('Sudoku', ['jquery',
 		        		row = parseInt($target.parent().attr('row'), 10),
 		        		col = parseInt($target.parent().attr('column'), 10);
 
-		        	if (that.board.matrix.indexOf(row,col) === val) {
-		        		that.board.mask.set(row, col, val);
-		        		that.save();
-		        		that.render(that.board.mask);
-		        	}
+		        	that.board.mask.set(row, col, val);
 		        });
-
-        		if (that.board.compare(that.board.mask.matrix_array, that.board.matrix.matrix_array)) {
-        			this.$footer.find('#victory').removeClass('hidden');
-        		} else {
-        			this.$footer.find('#victory').addClass('hidden');
-        		}
 			}
 		};
         

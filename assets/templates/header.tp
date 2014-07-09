@@ -1,7 +1,7 @@
 <div class="bar">
 	<div id="start" class="btn">Start New Game</div>
 	<div id="hint" class="btn">Show Hint</div>
-	<div id="load" class="btn">Load Game</div>
+	<div id="check" class="btn">Check Won</div>
 	<div id="show" class="btn">Show Solution</div>
 	<span class="stretch"></span>
 </div>

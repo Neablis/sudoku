@@ -18,4 +18,5 @@ requirejs.config({
 requirejs(['Sudoku'], function(Sudoku) {
         var div = document.getElementById('sudoku_application');
         Sudoku.start(div);
+        Sudoku.load();
 });
