@@ -30,7 +30,7 @@ define('Sudoku', ['jquery',
 		       	this.$footer = this.$dom.find('#footer');
 		        this.$footer.html(_.template(FooterTP));
 
-		        this.$body = this.$dom.find('#application')
+		        this.$body = this.$dom.find('#application');
 
 		        this.board.shuffle();
 		        this.board.mask_board(this.board.matrix);
@@ -56,9 +56,7 @@ define('Sudoku', ['jquery',
 		        	e.preventDefault();
 		        	that.show_answer();
 		        });
-		        	
-		        //board.give_hint(board.matrix, board.mask);
-			},
+		    },
 			restart: function () {
 				this.board = new Board(Matrix);
 
@@ -68,10 +66,10 @@ define('Sudoku', ['jquery',
 			},
 			load: function () {
 				if (Modernizr.localstorage) {
-
+					var values, storage;
 					try {
-						var values = localStorage.getItem("Sudoku"),
-							storage = JSON.parse(values);
+						values = localStorage.getItem("Sudoku");
+						storage = JSON.parse(values);
 					} catch (e) {
 						return false;
 					}
@@ -107,8 +105,9 @@ define('Sudoku', ['jquery',
 			render: function (matrix) {
 				var that = this;
 				this.$body.html(_.template(BoardTP, {'matrix': matrix}));
-				this.$body.off( "change");
-				this.$body.on( "change", function (e) {
+				this.$body.off("change paste keyup");
+				this.$body.on("change paste keyup", function (e) {
+					e.preventDefault();
 		        	var $target = $(e.target),
 		        		val = parseInt($target.val(), 10),
 		        		row = parseInt($target.parent().attr('row'), 10),
@@ -116,6 +115,7 @@ define('Sudoku', ['jquery',
 
 		        	if (that.board.matrix.indexOf(row,col) === val) {
 		        		that.board.mask.set(row, col, val);
+		        		that.save();
 		        		that.render(that.board.mask);
 		        	}
 		        });

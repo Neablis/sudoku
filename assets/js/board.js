@@ -225,7 +225,7 @@
         }
 
         return true;
-    }
+    };
 
     return Board;
 }));

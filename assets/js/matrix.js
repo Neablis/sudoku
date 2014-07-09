@@ -150,13 +150,5 @@
 		}
     };
 
-    Matrix.prototype.swap_row = function () {
-
-    };
-
-    Matrix.prototype.swap_column = function () {
-
-    };
-
     return Matrix;
 }));

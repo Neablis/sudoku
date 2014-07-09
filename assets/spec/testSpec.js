@@ -128,8 +128,19 @@ define(['require', 'Matrix', 'Board'], function (require, Matrix, Board, BoardTP
 					count++;
 				}
 			}
-			
+
 			expect(count).to.eql((9*5) - 1);
+		});
+
+		it('should compare two arrays and return if they are equal', function () {
+			var board = new Board(Matrix), count = 0;
+			board.shuffle();
+
+			board.mask_board(board.matrix, board.mask);
+			expect(board.compare(board.mask.matrix_array, board.matrix.matrix_array)).to.eql(false);
+
+			expect(board.compare(board.matrix.matrix_array, board.matrix.matrix_array)).to.eql(true);
+
 		});
 	});
 });
