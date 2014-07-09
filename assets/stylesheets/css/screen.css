@@ -216,9 +216,10 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 /* line 9, ../sass/screen.scss */
 body {
   height: 100%;
+  background-color: #4d0303;
 }
 
-/* line 13, ../sass/screen.scss */
+/* line 14, ../sass/screen.scss */
 html {
   height: 100%;
 }
