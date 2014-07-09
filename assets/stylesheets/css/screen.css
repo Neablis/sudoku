@@ -67,13 +67,73 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
-/* line 1, ../sass/sudoku.scss */
-#sudoku_board {
-  margin: auto;
-  width: 370px;
+/* line 7, ../sass/sudoku.scss */
+#header {
+  padding-top: 20px;
+  width: 100%;
+  height: 100px;
+  text-align: justify;
+  -ms-text-justify: distribute-all-lines;
+  text-justify: distribute-all-lines;
 }
-/* line 4, ../sass/sudoku.scss */
-#sudoku_board .parentCube {
+/* line 14, ../sass/sudoku.scss */
+#header .bar {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+/* line 17, ../sass/sudoku.scss */
+#header .bar .btn {
+  border-style: solid;
+  border-color: #bbb #888 #666 #aaa;
+  border-width: 3px 4px 4px 3px;
+  width: 9em;
+  height: 2em;
+  background-color: #8ead52;
+  color: #333;
+  line-height: 2;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 900;
+  vertical-align: top;
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+  cursor: pointer;
+}
+@media screen and (max-width: 850px) {
+  /* line 17, ../sass/sudoku.scss */
+  #header .bar .btn {
+    width: 5em;
+  }
+}
+/* line 38, ../sass/sudoku.scss */
+#header .bar .stretch {
+  width: 100%;
+  display: inline-block;
+  font-size: 0;
+  line-height: 0;
+}
+
+/* line 48, ../sass/sudoku.scss */
+#sudoku_application {
+  height: 100%;
+  background-color: #4d0303;
+  width: 75%;
+  margin: auto;
+  min-width: 500px;
+}
+/* line 55, ../sass/sudoku.scss */
+#sudoku_application #sudoku_board {
+  -webkit-box-shadow: 0px 5px 2px 2px black;
+  -moz-box-shadow: 0px 5px 2px 2px black;
+  box-shadow: 0px 5px 2px 2px black;
+  margin: auto;
+  width: 351px;
+  height: 333px;
+  background-color: #578989;
+}
+/* line 64, ../sass/sudoku.scss */
+#sudoku_application #sudoku_board .parentCube {
   border: 1px solid black;
   text-align: center;
   width: 110px;
@@ -83,20 +143,23 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   padding-top: 10px;
   padding-left: 5px;
 }
-/* line 13, ../sass/sudoku.scss */
-#sudoku_board .parentCube .childCube {
+/* line 74, ../sass/sudoku.scss */
+#sudoku_application #sudoku_board .parentCube .childCube {
   display: table-cell;
   width: 33px;
   height: 33px;
   vertical-align: middle;
   float: left;
+  -webkit-transition: color 2s;
+  /* For Safari 3.1 to 6.0 */
+  transition: color 2s;
 }
-/* line 19, ../sass/sudoku.scss */
-#sudoku_board .parentCube .childCube input[type=number] {
+/* line 83, ../sass/sudoku.scss */
+#sudoku_application #sudoku_board .parentCube .childCube input[type=number] {
   width: 20px;
 }
-/* line 22, ../sass/sudoku.scss */
-#sudoku_board .parentCube .childCube input[type=number]::-webkit-inner-spin-button {
+/* line 87, ../sass/sudoku.scss */
+#sudoku_application #sudoku_board .parentCube .childCube input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   cursor: pointer;
   display: block;
@@ -105,24 +168,48 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   text-align: center;
   position: relative;
 }
-/* line 32, ../sass/sudoku.scss */
-#sudoku_board .parentCube .childCube input[type=number]::-webkit-inner-spin-button:hover {
+/* line 97, ../sass/sudoku.scss */
+#sudoku_application #sudoku_board .parentCube .childCube input[type=number]::-webkit-inner-spin-button:hover {
   color: #236DCD;
 }
-/* line 37, ../sass/sudoku.scss */
-#sudoku_board .parentCube .childCube input[type=number]::-webkit-inner-spin-button:before,
-#sudoku_board .parentCube .childCube input[type=number]::-webkit-inner-spin-button:after {
+/* line 102, ../sass/sudoku.scss */
+#sudoku_application #sudoku_board .parentCube .childCube input[type=number]::-webkit-inner-spin-button:before,
+#sudoku_application #sudoku_board .parentCube .childCube input[type=number]::-webkit-inner-spin-button:after {
   content: "^";
   position: absolute;
   right: 0;
   font-family: monospace;
 }
-/* line 44, ../sass/sudoku.scss */
-#sudoku_board .parentCube .childCube input[type=number]::-webkit-inner-spin-button:before {
+/* line 109, ../sass/sudoku.scss */
+#sudoku_application #sudoku_board .parentCube .childCube input[type=number]::-webkit-inner-spin-button:before {
   top: 0px;
 }
-/* line 48, ../sass/sudoku.scss */
-#sudoku_board .parentCube .childCube input[type=number]::-webkit-inner-spin-button:after {
+/* line 113, ../sass/sudoku.scss */
+#sudoku_application #sudoku_board .parentCube .childCube input[type=number]::-webkit-inner-spin-button:after {
   bottom: 0px;
   -webkit-transform: rotate(180deg);
+}
+/* line 117, ../sass/sudoku.scss */
+#sudoku_application #sudoku_board .parentCube .childCube span.new_val {
+  color: white;
+}
+
+/* line 125, ../sass/sudoku.scss */
+#footer {
+  width: 100%;
+}
+
+/* line 129, ../sass/sudoku.scss */
+.hidden {
+  display: none;
+}
+
+/* line 9, ../sass/screen.scss */
+body {
+  height: 100%;
+}
+
+/* line 13, ../sass/screen.scss */
+html {
+  height: 100%;
 }

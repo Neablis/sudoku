@@ -11,18 +11,25 @@
     var width = 9, matrix, Matrix, mask;
 
     /** @constructor */
-    Board = function (Matrix) {
+    Board = function (Matrix, old_matrix) {
+        var matrix;
+
         if (Matrix === undefined && typeof Matrix !== undefined) {
             return undefined;
         }
 
         this.Matrix = Matrix;
-        var matrix = new Matrix(width);
 
-        //Sets matrix to a base predictable state
-        for (var i = 0; i < 9; i++) {
-            for (var j = 0; j < 9; j++) {
-                matrix.set(i * 9 + j, (i*3 + Math.floor(i/3) + j) % 9 + 1);
+        if (old_matrix !== undefined) {
+            matrix = new Matrix(old_matrix);
+        } else {
+            matrix = new Matrix(width);
+
+            //Sets matrix to a base predictable state
+            for (var i = 0; i < 9; i++) {
+                for (var j = 0; j < 9; j++) {
+                    matrix.set(i * 9 + j, (i*3 + Math.floor(i/3) + j) % 9 + 1);
+                }
             }
         }
 
@@ -158,7 +165,14 @@
     };
 
     // Turn 5 known values in each parent cube into 0's (unkown)
-    Board.prototype.mask_board = function(matrix) {
+    Board.prototype.mask_board = function(matrix, old_mask) {
+
+        if (old_mask !== undefined) {
+            // Wanted the ability to restore a old mask
+            this.mask = old_mask;
+            return this;
+        }
+
         var i, j, k, mask = new this.Matrix(this.matrix.matrix_array);
         for(i = 0; i < matrix.length; i++) {
             mask.set(i, matrix.indexOf(i));
@@ -195,7 +209,7 @@
         index = masked_index[Math.floor(Math.random() * masked_index.length)];
         value = matrix.indexOf(index);
         mask.set(index, value);
-        
+
         return this;
     };
 

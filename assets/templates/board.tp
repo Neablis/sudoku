@@ -20,9 +20,11 @@
                             <%
                             } else {
                             %>
-                            <%=
-                                value
-                            %>
+                            <span class="new_val">
+                                <%=
+                                    value
+                                %>
+                            </span>
                             <%
                             }
                         %>
